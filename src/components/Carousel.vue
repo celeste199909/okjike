@@ -11,7 +11,9 @@ export default {};
 </script>
 
 <style scoped>
-
+.el-carousel{
+    margin-top: 10px;
+}
   .el-carousel__item h3 {
     color: #475669;
     font-size: 14px;
