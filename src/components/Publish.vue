@@ -1,0 +1,86 @@
+<template>
+  <div class="block">
+    <el-input type="textarea" :autosize="{ minRows: 3, maxRows: 5}" placeholder="请输入内容"></el-input>
+    <el-autocomplete
+      v-model="state"
+      :fetch-suggestions="querySearchAsync"
+      placeholder="选择圈子"
+      @select="handleSelect"
+      size="mini"
+      prefix-icon="el-icon-search"
+    ></el-autocomplete>
+    <div class="operations">
+        <div class="files">
+            <el-link icon="el-icon-picture-outline-round">图片</el-link> 
+            <el-link icon="el-icon-video-camera">视频</el-link>
+        </div>
+        <el-button size="mini">发布</el-button>
+    </div>
+    
+  </div>
+</template>
+
+<script>
+export default {
+        data() {
+      return {
+        restaurants: [],
+        state: '',
+        timeout:  null
+      };
+    },
+    methods: {
+      loadAll() {
+        return [
+          { "value": "今天有什么好笑的"},
+          { "value": "有什么书值得读"},
+          { "value": "一觉醒来世界发生了什么"},
+          { "value": "最近在看什么剧"},
+          { "value": "前端交流站"},
+        ];
+      },
+      querySearchAsync(queryString, cb) {
+        var restaurants = this.restaurants;
+        var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants;
+
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => {
+          cb(results);
+        }, 3000 * Math.random());
+      },
+      createStateFilter(queryString) {
+        return (state) => {
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+        };
+      },
+      handleSelect(item) {
+        console.log(item);
+      }
+    },
+    mounted() {
+      this.restaurants = this.loadAll();
+    }
+};
+</script>
+
+<style scoped>
+.block {
+  background-color: white;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 2px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+.el-autocomplete{
+    margin: 10px 0;
+}
+
+.operations{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.files a{
+    margin-right: 10px;
+}
+</style>
