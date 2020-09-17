@@ -1,6 +1,6 @@
 <template>
   <div id="block">
-   <el-tabs v-model="activeName" @tab-click="handleClick">
+   <el-tabs v-model="activeName">
     <el-tab-pane label="登录" name="first">
         <el-form
       :model="ruleForm"
@@ -76,6 +76,7 @@ export default {
       }
     };
     return {
+      activeName:"first",
       ruleForm: {
         pass: "",
         checkPass: "",

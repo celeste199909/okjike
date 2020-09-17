@@ -3,7 +3,6 @@
     :default-active="activeIndex"
     class="el-menu-demo"
     mode="horizontal"
-    @select="handleSelect"
   >
     <el-menu-item index="1">
       <!-- <img class="logo" alt="Vue logo" src="../assets/logo.png"> -->
@@ -19,7 +18,7 @@
       <router-link class="a" to="/trends">动态</router-link>
     </el-menu-item>
     <el-menu-item index="4">
-      <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-search" v-model="input4"></el-input>
+      <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
     </el-menu-item>
     <el-menu-item index="5">
       <div>
@@ -36,7 +35,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      activeIndex: '2',
+    }
+  },
+};
 </script>
 
 <style scoped>

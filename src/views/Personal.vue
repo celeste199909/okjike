@@ -25,7 +25,7 @@
         <span> 游戏玩家 </span>
       </div>
     </div>
-    <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tabs v-model="activeName">
       <el-tab-pane label="动态" name="first">
         <div class="grid-content bg-purple" v-for="(i,j) in 5" :key="j">
           <Trend></Trend>
@@ -51,6 +51,7 @@ import Follow from "../components/Follow";
 export default {
   data() {
     return {
+      activeName:"first",
       src:
         "https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg",
     };
@@ -65,7 +66,7 @@ export default {
 <style scoped>
 .head {
   padding: 5% 12%;
-  background: url("https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg");
+  background: url("../assets/defaultbg.jpg");
   color: #fff;
 }
 .first-row{
