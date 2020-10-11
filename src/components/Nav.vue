@@ -2,14 +2,13 @@
   <el-menu
     :default-active="activeIndex"
     class="el-menu-demo"
-    mode="horizontal"
+    mode="vertical"
   >
-    <el-menu-item index="1">
-      <!-- <img class="logo" alt="Vue logo" src="../assets/logo.png"> -->
-      <div>
+    <el-menu-item index="1"> 
+      <router-link class="a" to="/discovery">
         <i class="el-icon-ice-cream-round"></i>
-        <span>okjike</span>
-      </div>
+        <span>OKJIKE</span>
+      </router-link>
     </el-menu-item>
     <el-menu-item index="2">
       <router-link class="a" to="/discovery">发现</router-link>
@@ -18,11 +17,11 @@
       <router-link class="a" to="/trends">动态</router-link>
     </el-menu-item>
     <el-menu-item index="4">
-      <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-search"></el-input>
-    </el-menu-item>
-    <el-menu-item index="5">
       <div>
-        <router-link class="a" to="/message"> <i class="el-icon-bell"></i>消息</router-link>
+        <router-link class="a" to="/message">
+          <i class="el-icon-bell"></i>
+          <span >消息</span>
+        </router-link>
       </div>
     </el-menu-item>
     <el-menu-item index="6">
@@ -49,19 +48,18 @@ export default {
   display: flex;
   justify-content:space-evenly;
 }
-.logo {
-  width: 40px;
-  height: 40px;
-}
 .el-menu-item{
   padding: 0;
 }
 .a{
   display: inline-block;
-  padding: 0 20px;
+  padding: 0 30px 0 10px;
 }
 a{
   text-decoration: none;
+}
+a:active{
+  color: blue;
 }
 .el-input__inner{
   width: 700px;
