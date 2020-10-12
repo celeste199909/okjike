@@ -6,11 +6,18 @@
 </template>
 
 <script>
+import store from "@/store"
 import Nav from "./components/Nav"
 export default {
   name: 'App',
   components: {
     Nav
+  },
+  created(){
+      let userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      if(userInfo){
+        store.commit("user/updateUserInfo", userInfo);
+      }
   }
 }
 </script>

@@ -1,6 +1,5 @@
 <template>
   <div id="trends">
-    <Carousel></Carousel>
     <el-row>
       <el-col :span="18">
         <div class="grid-content bg-purple" v-for="(i,j) in 5" :key="j">
@@ -23,7 +22,6 @@
 import Trend from "../components/Trend";
 import Profile from "../components/Profile";
 import Footer from "../components/Footer"
-// import Carousel from "../components/Carousel"
 
 export default {
   data() {
@@ -34,8 +32,7 @@ export default {
   components: {
     Trend,
     Profile,
-    Footer,
-    // Carousel
+    Footer
   },
 };
 </script>

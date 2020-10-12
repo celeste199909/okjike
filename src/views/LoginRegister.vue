@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import store from "@/store"
 export default {
   data() {
     return {
@@ -53,6 +54,10 @@ export default {
       username: "",
       password: "",
       rePassword: "",
+      user: {
+        username: "",
+        nickname: ""
+      }
     };
   },
   methods: {
@@ -77,9 +82,20 @@ export default {
             username: this.username,
             password: this.password,
           })
-          .then(() => {
-            console.log("login success");
-            this.$router.push("/discovery")
+          .then((data) => {
+            if(data.data === "登录失败"){
+              console.log("login fail");
+              return;
+            }
+
+            console.log(data)
+            console.log(store)
+            // store.commit("user/updateUserInfo", data.data)
+
+            localStorage.setItem("userInfo", JSON.stringify(data.data))
+            location.href = "/";
+            // this.$router.push("/discovery")
+            console.log("login success")
           })
           .catch((e) => {
             console.log(e);

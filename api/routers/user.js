@@ -1,28 +1,7 @@
 const KoaRouter = require("koa-router")
-const { Sequelize, DataTypes } = require('sequelize');
+const users = require("../models/users")
 
 const router = new KoaRouter()
-
-const sequelize = new Sequelize('okjike_dev', 'root', 'mysql1099', {
-    host: 'localhost',
-    dialect: 'mysql' /* 选择 'mysql' | 'mariadb' | 'postgres' | 'mssql' 其一 */
-  });
-
-//   (async function(){
-//     try {
-//         await sequelize.authenticate();
-//         console.log('Connection has been established successfully.');
-//       } catch (error) {
-//         console.error('Unable to connect to the database:', error);
-//       }
-//   })()
-
-  const User = sequelize.define("user", {
-    username: DataTypes.TEXT,
-    password: DataTypes.TEXT,
-  });
-
-
 
 router.get("/", ctx => {
     ctx.body = "hello"
@@ -31,7 +10,7 @@ router.get("/", ctx => {
 router.post("/login", async (ctx) => {
 
     let data = ctx.request.body;
-    let res = await User.findOne({
+    let res = await users.findOne({
         where: {
             username: data.username,
             password: data.password
@@ -43,7 +22,11 @@ router.post("/login", async (ctx) => {
         return;
     }
 
-    ctx.body = "登录成功"
+    ctx.body = {
+        id: res.id,
+        username: res.username,
+        nickname: res.nickname,
+    }
 
 })
 
@@ -52,7 +35,7 @@ router.post("/register", async (ctx) => {
     let data = ctx.request.body;
     // 验证数据库中是否已有该用户
 
-    let res = await User.findOne({
+    let res = await users.findOne({
         where: {username: data.username}
     })
 
@@ -61,7 +44,7 @@ router.post("/register", async (ctx) => {
         return;
     }
 
-    let user = User.build(data)
+    let user = users.build(data)
     await user.save()
     ctx.body = "注册成功"
 

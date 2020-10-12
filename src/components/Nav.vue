@@ -27,19 +27,32 @@
     <el-menu-item index="6">
       <div>
         <el-avatar size="small" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-        <router-link class="a" to="/personal">个人中心</router-link>
+        <router-link class="a" to="/personal">{{userInfo.username}}</router-link>
       </div>
     </el-menu-item>
   </el-menu>
 </template>
 
 <script>
+import store from "@/store"
 export default {
   data() {
     return {
       activeIndex: '2',
+      userInfo: {
+        username: "",
+        nickname: ""
+      }
     }
   },
+  async created(){
+    this.userInfo.username = store.state.user.userInfo.username;
+    this.userInfo.nickname = store.state.user.userInfo.nickname;
+  },
+  computed: {
+
+  }
+
 };
 </script>
 

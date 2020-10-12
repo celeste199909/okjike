@@ -6,13 +6,13 @@
           :size="100"
           src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
         ></el-avatar>
-        <div class="sign-out">
-          <el-button round size="mini">
-            <router-link to="/login">注销</router-link>
+        <div class="sign-out" @click="handleLoginOut">
+          <el-button round size="mini" >
+            <a href="/login">注销</a>
           </el-button>
         </div>
       </div>
-      <div class="nickname personal-item">你的昵称</div>
+      <div class="nickname personal-item">{{userInfo.nickname}}</div>
       <div class="personal-item">
         <span>100</span>
         <span>关注 </span> 
@@ -48,18 +48,33 @@
 <script>
 import Trend from "../components/Trend";
 import Follow from "../components/Follow";
+import store from "@/store"
 export default {
   data() {
     return {
       activeName:"first",
       src:
         "https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg",
+       userInfo: {
+        username: "",
+        nickname: ""
+      }
     };
+  },
+  methods: {
+    handleLoginOut(){
+      localStorage.removeItem("userInfo");
+    }
+  },
+  created(){
+    this.userInfo.username = store.state.user.userInfo.username;
+    this.userInfo.nickname = store.state.user.userInfo.nickname;
   },
   components: {
     Trend,
     Follow,
   },
+  
 };
 </script>
 
