@@ -4,13 +4,26 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:create": "sequelize db:create",
+    "db:drop": "sequelize db:drop",
+    "db:migrate": "sequelize db:migrate",
+    "db:migrate:undo:all": "sequelize db:migrate:undo:all",
+    "db:seed:all": "sequelize db:seed:all",
+    "db:seed:undo:all": "sequelize db:seed:undo:all",
+    "db:init": "npm run db:create && npm run db:migrate && npm run db:seed:all",
+    "db:redo": "npm run db:drop && npm run db:init"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^9.4.0",
-    "koa2": "^2.0.0-alpha.7"
+    "koa2": "^2.0.0-alpha.7",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.2.0"
   }
 }

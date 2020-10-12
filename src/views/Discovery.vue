@@ -23,7 +23,7 @@
 import Trend from "../components/Trend";
 import Profile from "../components/Profile";
 import Footer from "../components/Footer"
-import Carousel from "../components/Carousel"
+// import Carousel from "../components/Carousel"
 
 export default {
   data() {
@@ -35,7 +35,7 @@ export default {
     Trend,
     Profile,
     Footer,
-    Carousel
+    // Carousel
   },
 };
 </script>

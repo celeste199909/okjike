@@ -56,10 +56,8 @@ export default {
   padding: 0 30px 0 10px;
 }
 a{
+  color: darkslategrey;
   text-decoration: none;
-}
-a:active{
-  color: blue;
 }
 .el-input__inner{
   width: 700px;
