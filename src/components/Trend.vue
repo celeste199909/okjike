@@ -11,11 +11,11 @@
       <!-- 右边 -->
         <el-col :span="22">
           <div class="grid-content bg-purple-light">
-              <div class="nickname">昵称</div>
-              <div class="signature">个性签名</div>
+              <div class="nickname">{{article.username}}</div>
+              <div class="signature">{{article.slogan}}</div>
           </div>
           <div class="grid-content bg-purple-light content">
-              开头是一个假设，“假如生活欺骗了你”，这假设会深深伤害人们，足以使脆弱的人们丧失生活的信心，足以使那些不够坚强的人面临“灾难”。那的确是个很糟糕的事情，但诗人并不因为这而消沉、逃避和心情忧郁，不会因为被生活欺骗而去愤慨，做出出格的事情。诗中阐明了这样一种乐观坚强、积极向上的人生态度：当生活欺骗了你时，不要悲伤，不要心急。生活中不可能没有痛苦与悲伤，欢乐不会永远被忧伤所掩盖。
+              {{article.content}}
           </div>
           <div class="grid-content bg-purple-light footer">
               <div class="footer-item"><i class="el-icon-thumb"></i></div>
@@ -31,7 +31,25 @@
 </template>
 
 <script>
-export default {};
+// import axios from "axios"
+export default {
+  name: "Trend",
+  props: ["aArticle"],
+  data(){
+    return {
+      article: {
+        userid: "",
+        username: "",
+        slogan: "",
+        content: "",
+        group: ""
+      }
+    }
+  },
+  mounted(){
+    this.article = this.aArticle
+  }
+};
 </script>
 
 <style scoped>

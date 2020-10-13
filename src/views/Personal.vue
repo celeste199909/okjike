@@ -27,8 +27,8 @@
     </div>
     <el-tabs v-model="activeName">
       <el-tab-pane label="动态" name="first">
-        <div class="grid-content bg-purple" v-for="(i,j) in 5" :key="j">
-          <Trend></Trend>
+        <div class="grid-content bg-purple" v-for="(item,index) in allMyArticles" :key="index">
+          <Trend :aArticle="item"></Trend>
         </div>
       </el-tab-pane>
       <el-tab-pane label="关注" name="second">
@@ -49,6 +49,7 @@
 import Trend from "../components/Trend";
 import Follow from "../components/Follow";
 import store from "@/store"
+import axios from "axios"
 export default {
   data() {
     return {
@@ -58,7 +59,8 @@ export default {
        userInfo: {
         username: "",
         nickname: ""
-      }
+      },
+      allMyArticles: []
     };
   },
   methods: {
@@ -69,6 +71,17 @@ export default {
   created(){
     this.userInfo.username = store.state.user.userInfo.username;
     this.userInfo.nickname = store.state.user.userInfo.nickname;
+
+      let userid = JSON.parse(localStorage.getItem("userInfo")).id;
+      console.log(typeof userid);
+      axios.get(`api/allMyArticles?userid=${userid}`)
+      .then((res) => {
+        // console.log(res.data.data)
+        this.allMyArticles = res.data.data;
+      }).catch(e => {
+        console.log(e)
+      })
+
   },
   components: {
     Trend,

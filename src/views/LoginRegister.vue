@@ -67,6 +67,7 @@ export default {
           .post("/api/register", {
             username: this.username,
             password: this.password,
+            slogan: "让世界更美好"
           })
           .then(() => {
             console.log("reigster success");

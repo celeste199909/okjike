@@ -26,6 +26,7 @@ router.post("/login", async (ctx) => {
         id: res.id,
         username: res.username,
         nickname: res.nickname,
+        slogan: res.slogan
     }
 
 })

@@ -34,19 +34,25 @@ export default {
       timeout: null,
       article: {
         userid: "",
-        content: '',
-        group: ''
+        username: "",
+        slogan: "",
+        content: "",
+        group: ""
       }
     };
   },
   methods: {
     // customer
     handlePublishArticle(){
-      let userid = JSON.parse(localStorage.getItem("userInfo")).id
-      this.article.userid = userid;
-      axios.post("api/publishArticle", {
-        articleData: this.article
-      }).then(res => {
+      let userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+      this.article.userid = userInfo.id;
+      this.article.username = userInfo.username;
+      this.article.slogan = userInfo.slogan;
+
+      axios.post("api/publishArticle", 
+        this.article
+      ).then(res => {
         console.log(res);
         if(res.data.code === 200){
           alert(res.data.status)
