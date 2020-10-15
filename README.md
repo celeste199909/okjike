@@ -1,51 +1,33 @@
-# okjike
+## How to run
 
-## Project setup
+### clone
+
+```bash
+git clone https://github.com/iceream/okjike.git
 ```
+
+```bash
+cd okjike-master
+```
+
+### run frontend
+
+```bash
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### run backend 
 
-### Lints and fixes files
-```
-npm run lint
-```
+the project use sequelize;
+before run the backend, you need config you mysql database, see more detail in api/configs folder;
+about sequelize's config in `.sequelizerc` file;
+database models in api/models, if you want not to create table by youself, you can opne `follows.sync({force: true})` in the three models file.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```bash
+npm install
 
-### 安装ElementUI
+nodemon
+# if you have not install nodemon, you can install it by `npm i nodemon -g`
 
-```
-npm i element-ui -S
-```
-
-在`main.js`中引入`ElementUI`并且使用
-
-```
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-
-Vue.use(ElementUI);
-
-```
-
-### 安装Vue-Router
-
-```
-npm install vue-router
-```
-
-```
-// mian.js
-Vue.use(VueRouter)
 ```
