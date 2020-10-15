@@ -89,10 +89,10 @@ export default {
               return;
             }
 
-            console.log(data)
+            // console.log(data)
             console.log(store)
             // store.commit("user/updateUserInfo", data.data)
-
+            // store.commit("updateLoginStatus", {isLogin: true})
             localStorage.setItem("userInfo", JSON.stringify(data.data))
             location.href = "/";
             // this.$router.push("/discovery")

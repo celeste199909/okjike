@@ -10,8 +10,8 @@
       <!-- 右边 -->
       <el-col :span="18">
         <div class="grid-content bg-purple-light">
-          <div class="nickname">昵称</div>
-          <div class="signature">个性签名</div>
+          <div class="nickname">{{username}}</div>
+          <div class="signature">{{slogan}}</div>
         </div>
       </el-col>
       <!--  -->
@@ -23,7 +23,17 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["username", "slogan"],
+  name: "Follow",
+  data(){
+    return {
+
+    }
+  },
+  created(){
+  }
+};
 </script>
 
 <style scoped>

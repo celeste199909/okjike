@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="18">
         <div class="grid-content bg-purple" v-for="(i,j) in 5" :key="j">
-          <Trend></Trend>
+          <!-- <Trend></Trend> -->
         </div>
       </el-col>
       <el-col :span="6">
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import Trend from "../components/Trend";
+// import Trend from "../components/Trend";
 import Profile from "../components/Profile";
 import Footer from "../components/Footer"
 
@@ -30,7 +30,7 @@ export default {
     };
   },
   components: {
-    Trend,
+    // Trend,
     Profile,
     Footer
   },

@@ -7,19 +7,21 @@
           src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
         ></el-avatar>
         <div class="sign-out" @click="handleLoginOut">
-          <el-button round size="mini" >
-            <a href="/login">注销</a>
+          <el-button round size="mini">
+            <a href="/login">{{isLogin ? "注销" : "登录"}}</a>
           </el-button>
         </div>
       </div>
-      <div class="nickname personal-item">{{userInfo.nickname}}</div>
+      <div class="nickname personal-item">{{ userInfo.username }}</div>
       <div class="personal-item">
-        <span>100</span>
-        <span>关注 </span> 
-        <span> 1000</span>
-        <span>被关注</span>
+        <span>关注：</span>
+        <span>{{allMyFlollowing.length}} </span>
+        <span> 关注我的：</span>
+        <span>{{allMyFollower.length}}</span>
       </div>
-      <div class="personal-item">为什么要给我一颗跳动的心脏，却忘了给我飞翔的翅膀。</div>
+      <div class="personal-item">
+        {{userInfo.slogan}}
+      </div>
       <div class="personal-item">
         <span> 天秤座 </span>
         <span> 游戏玩家 </span>
@@ -27,18 +29,22 @@
     </div>
     <el-tabs v-model="activeName">
       <el-tab-pane label="动态" name="first">
-        <div class="grid-content bg-purple" v-for="(item,index) in allMyArticles" :key="index">
+        <div
+          class="grid-content bg-purple"
+          v-for="(item, index) in allMyArticles"
+          :key="index"
+        >
           <Trend :aArticle="item"></Trend>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="关注" name="second">
-        <div v-for="(i,j) in 10" :key="j">
-          <Follow></Follow>
+      <el-tab-pane label="我关注的" name="second">
+        <div v-for="(item, index) in allMyFlollowing" :key="index">
+          <Follow :username="item.username" :slogan="item.slogan"></Follow>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="被关注" name="third">
-        <div v-for="(i,j) in 10" :key="j">
-          <Follow></Follow>
+      <el-tab-pane label="关注我的" name="third">
+        <div v-for="(item, index) in allMyFollower" :key="index">
+          <Follow :username="item.username" :slogan="item.slogan"></Follow>
         </div>
       </el-tab-pane>
     </el-tabs>
@@ -48,46 +54,83 @@
 <script>
 import Trend from "../components/Trend";
 import Follow from "../components/Follow";
-import store from "@/store"
-import axios from "axios"
+import store from "@/store";
+import axios from "axios";
 export default {
   data() {
     return {
-      activeName:"first",
+      activeName: "first",
       src:
         "https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg",
-       userInfo: {
+      userInfo: {
         username: "",
-        nickname: ""
+        slogan: "",
       },
-      allMyArticles: []
+      allMyArticles: [],
+      allMyFlollowing: [],
+      allMyFollower: [],
+      isLogin: false
     };
   },
   methods: {
-    handleLoginOut(){
+    handleLoginOut() {
       localStorage.removeItem("userInfo");
-    }
+    },
   },
-  created(){
+  created() {
     this.userInfo.username = store.state.user.userInfo.username;
-    this.userInfo.nickname = store.state.user.userInfo.nickname;
+    this.userInfo.slogan = store.state.user.userInfo.slogan;
 
-      let userid = JSON.parse(localStorage.getItem("userInfo")).id;
-      console.log(typeof userid);
-      axios.get(`api/allMyArticles?userid=${userid}`)
+    // 获取自己所有的文章
+    let userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+    if(userInfo){
+      this.isLogin = true;
+    }
+    // 如果用户未登录则return
+    if(!this.isLogin){
+      return;
+    }
+    let userid = userInfo.id;
+
+    axios
+      .get(`api/allMyArticles?userid=${userid}`)
       .then((res) => {
         // console.log(res.data.data)
         this.allMyArticles = res.data.data;
-      }).catch(e => {
-        console.log(e)
+        // store.commit("user/getAllMyFollowing", res.data.data)
       })
+      .catch((e) => {
+        console.log(e);
+      });
 
+    // 获取所有自己关注的人
+
+    axios
+      .get(`api/allMyFollowing?userid=${userid}`)
+      .then((res) => {
+        // console.log(res.data.data)
+        this.allMyFlollowing = res.data.data;
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    // 获取所有关注我的人 /allMyFollower
+       axios
+      .get(`api/allMyFollower?userid=${userid}`)
+      .then((res) => {
+        // console.log(res.data.data)
+        this.allMyFollower = res.data.data;
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   },
   components: {
     Trend,
     Follow,
   },
-  
 };
 </script>
 
@@ -97,12 +140,12 @@ export default {
   background: url("../assets/defaultbg.jpg");
   color: #fff;
 }
-.first-row{
-    display: flex;
-    justify-content: space-between;
+.first-row {
+  display: flex;
+  justify-content: space-between;
 }
-.personal-item{
-    margin: 5px 0;
+.personal-item {
+  margin: 5px 0;
 }
 .nickname {
   font-size: 24px;
@@ -118,5 +161,4 @@ export default {
 .sign-out button {
   background: transparent;
 }
-
 </style>
