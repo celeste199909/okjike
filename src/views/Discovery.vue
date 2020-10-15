@@ -2,8 +2,8 @@
   <div id="trends">
     <el-row>
       <el-col :span="18">
-        <div class="grid-content bg-purple" v-for="(i,j) in 5" :key="j">
-          <!-- <Trend></Trend> -->
+        <div class="grid-content bg-purple" v-for="(item, index) in allArticles" :key="index">
+          <Trend :aArticle="item"></Trend>
         </div>
       </el-col>
       <el-col :span="6">
@@ -19,21 +19,32 @@
 </template>
 
 <script>
-// import Trend from "../components/Trend";
+import Trend from "../components/Trend";
 import Profile from "../components/Profile";
-import Footer from "../components/Footer"
+import Footer from "../components/Footer";
+import axios from "axios"
+
 
 export default {
+  name: "Discovery",
   data() {
     return {
-      num: 10,
+      allArticles: []
     };
   },
   components: {
-    // Trend,
+    Trend,
     Profile,
     Footer
   },
+  created(){
+    axios.get("/api/allArticles")
+    .then( ( response ) => {
+      // console.log(response.data.data)
+      this.allArticles = response.data.data
+    })
+    .catch(e => {throw e})
+  }
 };
 </script>
 

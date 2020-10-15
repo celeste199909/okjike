@@ -6,8 +6,8 @@
       </div>
       <div class="new-trend"><a href="">有新动态，点击查看</a></div>
       <el-col :span="18">
-        <div class="grid-content bg-purple" v-for="(i,j) in 5" :key="j">
-          <!-- <Trend></Trend> -->
+        <div class="grid-content bg-purple" v-for="(item, index) in allFollowingArticles" :key="index">
+          <Trend :aArticle="item"></Trend>
         </div>
       </el-col>
       <el-col :span="6">
@@ -23,21 +23,39 @@
 </template>
 
 <script>
-// import Trend from "../components/Trend";
+import Trend from "../components/Trend";
 import Profile from "../components/Profile";
 import Footer from "../components/Footer";
 import Publish from "../components/Publish";
 
+import axios from "axios"
+
 export default {
+  name: "Trends",
   data() {
-    return {};
+    return {
+      allFollowingArticles: []
+    };
   },
   components: {
-    // Trend,
+    Trend,
     Profile,
     Footer,
     Publish,
   },
+  created(){
+
+    let userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+    let userid = userInfo.id;
+    axios.get(`api/myFollowingArticles?userid=${userid}`)
+    .then( (res) => {
+      this.allFollowingArticles = res.data.data;
+    } )
+    .catch(e => { throw e })
+
+
+  }
 };
 </script>
 

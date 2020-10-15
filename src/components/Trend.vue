@@ -11,11 +11,11 @@
       <!-- 右边 -->
         <el-col :span="22">
           <div class="grid-content bg-purple-light">
-              <div class="nickname">{{article.username}}</div>
-              <div class="signature">{{article.slogan}}</div>
+              <div class="nickname">{{aArticle.username}}</div>
+              <div class="signature">{{aArticle.slogan}}</div>
           </div>
           <div class="grid-content bg-purple-light content">
-              {{article.content}}
+              {{aArticle.content}}
           </div>
           <div class="grid-content bg-purple-light footer">
               <div class="footer-item"><i class="el-icon-thumb"></i></div>
@@ -47,7 +47,7 @@ export default {
     }
   },
   mounted(){
-    this.article = this.aArticle
+    // this.article = this.aArticle
   }
 };
 </script>
