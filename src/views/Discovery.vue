@@ -8,7 +8,7 @@
       </el-col>
       <el-col :span="6">
         <div class="grid-content bg-purple-light">
-          <Profile title="发现"></Profile>
+          <SideMessage title="热门动态"></SideMessage>
         </div>
         <div class="grid-content bg-purple-light">
           <Footer></Footer>
@@ -20,7 +20,7 @@
 
 <script>
 import Trend from "../components/Trend";
-import Profile from "../components/Profile";
+import SideMessage from "../components/SideMessage";
 import Footer from "../components/Footer";
 import axios from "axios"
 
@@ -34,7 +34,7 @@ export default {
   },
   components: {
     Trend,
-    Profile,
+    SideMessage,
     Footer
   },
   created(){
@@ -50,6 +50,7 @@ export default {
 
 <style scoped>
 #trends{
+  padding-top: 60px;
 }
 .el-row{
     width: 80%;

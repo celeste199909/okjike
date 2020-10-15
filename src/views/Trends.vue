@@ -4,7 +4,7 @@
       <div class="publish">
         <Publish></Publish>
       </div>
-      <div class="new-trend"><a href="">有新动态，点击查看</a></div>
+      <!-- <div class="new-trend"><a href="">有新动态，点击查看</a></div> -->
       <el-col :span="18">
         <div class="grid-content bg-purple" v-for="(item, index) in allFollowingArticles" :key="index">
           <Trend :aArticle="item"></Trend>
@@ -12,7 +12,7 @@
       </el-col>
       <el-col :span="6">
         <div class="grid-content bg-purple-light">
-          <Profile title="动态"></Profile>
+          <SideMessage title="推荐用户"></SideMessage>
         </div>
         <div class="grid-content bg-purple-light">
           <Footer></Footer>
@@ -24,7 +24,7 @@
 
 <script>
 import Trend from "../components/Trend";
-import Profile from "../components/Profile";
+import SideMessage from "../components/SideMessage";
 import Footer from "../components/Footer";
 import Publish from "../components/Publish";
 
@@ -39,7 +39,7 @@ export default {
   },
   components: {
     Trend,
-    Profile,
+    SideMessage,
     Footer,
     Publish,
   },
@@ -61,12 +61,13 @@ export default {
 
 <style scoped>
 #trends {
+  padding-top: 60px;
 }
 .el-row {
   width: 80%;
   margin: 0 auto;
 }
-.new-trend{
+/* .new-trend{
   background-color: white;
   margin: 10px 10px 0 10px;
   padding: 10px;
@@ -77,5 +78,5 @@ export default {
 }
 .new-trend a{
   color: skyblue;
-}
+} */
 </style>

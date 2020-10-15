@@ -11,8 +11,8 @@
       <!-- 右边 -->
         <el-col :span="22">
           <div class="grid-content bg-purple-light">
-              <div class="nickname">{{aArticle.username}}</div>
-              <div class="signature">{{aArticle.slogan}}</div>
+              <div class="username">{{aArticle.username}}</div>
+              <div class="slogan">{{aArticle.slogan}}</div>
           </div>
           <div class="grid-content bg-purple-light content">
               {{aArticle.content}}
@@ -58,19 +58,43 @@ export default {
   margin: 10px;
   padding: 20px;
   border-radius: 2px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   font-size: 14px;
+
+  /* transform:translateY(100px); */
+  animation: slidein 0.5s;
+  /* transform:translateY(-100px); */
 }
-.signature{
+@keyframes slidein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.trend:hover{
+  cursor: pointer;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+.username{
+  font-weight: 800;
+  font-size: 16px;
+
+}
+.slogan{
     color: #ccc;
+    font-size: 12px;
 }
 .content{
     padding: 4px 0;
+    /* font-weight: 400; */
+    color: rgb(100, 100, 100);
 }
 .footer{
     display: flex;
 }
 .footer-item{
     margin-right: 14px;
+    font-size: 18px;
 }
 </style>

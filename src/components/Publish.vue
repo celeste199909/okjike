@@ -100,12 +100,22 @@ export default {
 </script>
 
 <style scoped>
+@keyframes slidein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .block {
   background-color: white;
-  margin: 10px;
+  margin: 10px 10px 0 10px;
   padding: 20px;
   border-radius: 2px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); */
+  animation: slidein 1s ;
+
 }
 .el-autocomplete {
   margin: 10px 0;
@@ -119,4 +129,9 @@ export default {
 .files a {
   margin-right: 10px;
 }
+.el-button{
+  border-radius: 20px;
+  /* background-color: #8ACEFF; */
+}
+/* #8ACEFF */
 </style>

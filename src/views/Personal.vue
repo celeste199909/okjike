@@ -1,30 +1,29 @@
 <template>
-  <div>
+  <div class="wrapper">
     <div class="head">
       <div class="first-row">
         <el-avatar
           :size="100"
           src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
         ></el-avatar>
-        <div class="sign-out" @click="handleLoginOut">
-          <el-button round size="mini">
-            <a href="/login">{{isLogin ? "注销" : "登录"}}</a>
+        <div class="sign-out" >
+          <el-button round size="mini" @click="handleLoginOut">
+            {{isLogin ? "注销" : "登录"}}
           </el-button>
         </div>
       </div>
       <div class="nickname personal-item">{{ userInfo.username }}</div>
       <div class="personal-item">
-        <span>关注：</span>
-        <span>{{allMyFlollowing.length}} </span>
-        <span> 关注我的：</span>
-        <span>{{allMyFollower.length}}</span>
+        <span style="margin-right:10px">关注 {{allMyFlollowing.length}} </span>
+        <span>被 {{allMyFollower.length}} 关注</span>
       </div>
       <div class="personal-item">
         {{userInfo.slogan}}
       </div>
-      <div class="personal-item">
-        <span> 天秤座 </span>
-        <span> 游戏玩家 </span>
+      <div class="personal-item tags">
+        <div v-for="(item,index) in this.userInfo.tags" :key="index">
+          {{item}}
+        </div>
       </div>
     </div>
     <el-tabs v-model="activeName">
@@ -65,6 +64,7 @@ export default {
       userInfo: {
         username: "",
         slogan: "",
+        tags: []
       },
       allMyArticles: [],
       allMyFlollowing: [],
@@ -75,15 +75,18 @@ export default {
   methods: {
     handleLoginOut() {
       localStorage.removeItem("userInfo");
+      location.href = "/login"
     },
   },
   created() {
+    // 如果是未登录状态则在store中获取默认的 用户名和个性签名
     this.userInfo.username = store.state.user.userInfo.username;
     this.userInfo.slogan = store.state.user.userInfo.slogan;
 
-    // 获取自己所有的文章
+    // 获取自己的信息
     let userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
+    // 如果存在用户信息则把登录状态变成true
     if(userInfo){
       this.isLogin = true;
     }
@@ -91,8 +94,12 @@ export default {
     if(!this.isLogin){
       return;
     }
+
+    this.userInfo.tags = JSON.parse(userInfo.tags)
+
     let userid = userInfo.id;
 
+    // 获取自己所有的文章
     axios
       .get(`api/allMyArticles?userid=${userid}`)
       .then((res) => {
@@ -135,6 +142,9 @@ export default {
 </script>
 
 <style scoped>
+.wrapper{
+  padding-top: 60px;
+}
 .head {
   padding: 5% 12%;
   background: url("../assets/defaultbg.jpg");
@@ -145,7 +155,7 @@ export default {
   justify-content: space-between;
 }
 .personal-item {
-  margin: 5px 0;
+  margin: 8px 0;
 }
 .nickname {
   font-size: 24px;
@@ -153,12 +163,44 @@ export default {
 .el-tabs {
   padding: 0 12%;
 }
+/* .sign-out a {
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+} */
+.el-button--default{
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+}
+
 .sign-out a {
   font-size: 18px;
   color: #fff;
   text-decoration: none;
 }
+
 .sign-out button {
   background: transparent;
+}
+.tags{
+    display: flex;
+}
+.tags div{
+    border-radius: 999px;
+    height: 20px;
+    padding: 4px 10px;
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+    line-height: 12px;
+    -webkit-box-align: center;
+    align-items: center;
+    word-break: keep-all;
+    white-space: nowrap;
+    box-sizing: border-box;
+    margin: 0px;
+    margin-right: 8px;
+    min-width: 0px;
+    background-color: rgba(191, 191, 191, 0.6);
 }
 </style>

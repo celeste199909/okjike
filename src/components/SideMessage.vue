@@ -19,6 +19,18 @@ div {
   margin: 10px 10px 10px 0;
   padding: 20px;
   border-radius: 2px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); */
+  animation: slidein 1s;
+
+
+}
+
+@keyframes slidein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 </style>

@@ -1,11 +1,12 @@
 <template>
   <el-menu
     :default-active="activeIndex"
-    class="el-menu-demo"
-    mode="vertical"
+    class="el-menu"
+    mode="horizontal"
+    
   >
     <el-menu-item index="1"> 
-      <router-link class="a" to="/discovery">
+      <router-link class="a" to="/">
         <i class="el-icon-ice-cream-round"></i>
         <span>OKJIKE</span>
       </router-link>
@@ -57,16 +58,25 @@ export default {
 </script>
 
 <style scoped>
-.el-menu-demo{
+.el-menu{
+  position: fixed;
+  z-index: 100; 
   display: flex;
   justify-content:space-evenly;
+  width: 100%;
+  /* margin-bottom: 000px; */
+}
+.clearfix::after{
+  content: "";
+  display: block;
+  clear: both;
 }
 .el-menu-item{
   padding: 0;
 }
 .a{
   display: inline-block;
-  padding: 0 30px 0 10px;
+  padding: 0 10px;
 }
 a{
   color: darkslategrey;

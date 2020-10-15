@@ -24,10 +24,9 @@ router.post("/login", async (ctx) => {
     }
 
     ctx.body = {
-        id: res.id,
-        username: res.username,
-        nickname: res.nickname,
-        slogan: res.slogan
+        code: 200,
+        status: "登录成功",
+        data: res
     }
 
 })
@@ -125,5 +124,13 @@ router.get("/allMyFollower", async (ctx) => {
         data: allMyFollower
     }
 } )
+
+// 推荐用户，根据标签推荐用户
+
+router.post("/recommendatoryUsers", async (ctx) => {
+    let data = ctx.request.body;
+
+    console.log(data)
+})
 
 module.exports = router
