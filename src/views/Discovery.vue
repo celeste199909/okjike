@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="18">
         <div class="grid-content bg-purple" v-for="(item, index) in allArticles" :key="index">
-          <Trend :aArticle="item"></Trend>
+          <Trend :aArticle="item" ></Trend>
         </div>
       </el-col>
       <el-col :span="6">
@@ -37,6 +37,7 @@ export default {
     SideMessage,
     Footer
   },
+
   created(){
     axios.get("/api/allArticles")
     .then( ( response ) => {

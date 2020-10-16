@@ -1,5 +1,5 @@
 <template>
-  <div class="trend">
+  <div class="trend" @click="ArticleDetails">
     <article>
       <el-row>
       <!-- 左边 -->
@@ -44,6 +44,11 @@ export default {
         content: "",
         group: ""
       }
+    }
+  },
+      methods: {
+    ArticleDetails(){
+      console.log("ArticleDetails")
     }
   },
   mounted(){

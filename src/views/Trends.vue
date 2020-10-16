@@ -1,5 +1,5 @@
 <template>
-  <div id="trends">
+  <div id="trends" >
     <el-row>
       <div class="publish">
         <Publish></Publish>
@@ -43,6 +43,7 @@ export default {
     Footer,
     Publish,
   },
+
   created(){
 
     let userInfo = JSON.parse(localStorage.getItem("userInfo"));
