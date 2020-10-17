@@ -62,15 +62,16 @@ router.get("/allArticles", async (ctx) => {
 router.get("/myFollowingArticles", async(ctx) => {
 
     let data = ctx.request.query;
-    // console.log(data.userid)
 
     let userid = data.userid;
+    // console.log(userid)
 
     let res = await follows.findAll({
         where: {
             userid: userid
         }
     })
+    // console.log(res)
     
     // 定义一个数组来保存id（我关注的人的id）
     let MyFollowingUserid = []
@@ -79,12 +80,14 @@ router.get("/myFollowingArticles", async(ctx) => {
             // 把id push 到数组中去
             MyFollowingUserid.push(item.dataValues.following);
         })
+    // console.log(MyFollowingUserid)
 
     let myFollowingArticles = await articles.findAll({
         where: {
-            id: MyFollowingUserid
+            userid: MyFollowingUserid
         }
     })
+    // console.log(myFollowingArticles)
 
     ctx.body = {
         code: 200,
@@ -92,6 +95,29 @@ router.get("/myFollowingArticles", async(ctx) => {
         data: myFollowingArticles
     }
 
+})
+
+// 获取一条动态的详情
+router.get("/details/:id", async (ctx) => {
+    
+    console.log(ctx.request.path)
+    let articleId = ctx.request.path.split("/")[2]
+    console.log(articleId)
+
+
+    let aArticleDetails = await articles.findAll({
+        where: {
+            id: articleId
+        }
+    })
+
+    // console.log(allMyArticles)
+
+    ctx.body = {
+        code: 200,
+        msg: "成功获取动态详情",
+        data: aArticleDetails
+    }
 })
 
 

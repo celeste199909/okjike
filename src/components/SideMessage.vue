@@ -18,7 +18,7 @@ div {
   background-color: white;
   margin: 10px 10px 10px 0;
   padding: 20px;
-  border-radius: 2px;
+  border-radius: 5px;
   /* box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); */
   animation: slidein 1s;
 

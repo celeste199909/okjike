@@ -52,6 +52,7 @@ export default {
     axios.get(`api/myFollowingArticles?userid=${userid}`)
     .then( (res) => {
       this.allFollowingArticles = res.data.data;
+      // console.log(res)
     } )
     .catch(e => { throw e })
 

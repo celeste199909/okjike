@@ -74,13 +74,17 @@ export default {
 .el-menu-item{
   padding: 0;
 }
+
 .a{
+  font-size: 16px;
   display: inline-block;
   padding: 0 10px;
-}
-a{
   color: darkslategrey;
   text-decoration: none;
+}
+.a:hover{
+  transform: scale(1.1);
+  transition: all 0.1s;
 }
 .el-input__inner{
   width: 700px;

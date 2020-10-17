@@ -25,7 +25,7 @@ export default {
 <style>
 body{
   margin: 0;
-  background-color: aliceblue;
+  background-color: #EFF3F6;
   font-size: 14px;
 }
 </style>
