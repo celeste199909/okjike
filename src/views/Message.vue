@@ -39,7 +39,7 @@ export default {
 <style scoped>
 .block {
   background: #fff;
-  margin: 0 12%;
+    margin: 0 12% 300px 12%;
   padding-top: 100px;
 }
 </style>

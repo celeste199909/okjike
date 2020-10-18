@@ -46,6 +46,11 @@
           <Follow :username="item.username" :slogan="item.slogan"></Follow>
         </div>
       </el-tab-pane>
+      <!-- <el-tab-pane label="收藏动态" name="four">
+        <div v-for="(item, index) in allMyFollower" :key="index">
+          <Follow :username="item.username" :slogan="item.slogan"></Follow>
+        </div>
+      </el-tab-pane> -->
     </el-tabs>
   </div>
 </template>
@@ -143,7 +148,9 @@ export default {
 
 <style scoped>
 .wrapper{
+  margin: 0 0 300px 0;
   padding-top: 60px;
+  
 }
 .head {
   padding: 5% 12%;

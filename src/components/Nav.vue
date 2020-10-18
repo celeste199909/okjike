@@ -17,14 +17,14 @@
     <el-menu-item index="3">
       <router-link class="a" to="/trends">动态</router-link>
     </el-menu-item>
-    <el-menu-item index="4">
+    <!-- <el-menu-item index="4">
       <div>
         <router-link class="a" to="/message">
           <i class="el-icon-bell"></i>
           <span >消息</span>
         </router-link>
       </div>
-    </el-menu-item>
+    </el-menu-item> -->
     <el-menu-item index="6">
       <div>
         <el-avatar size="small" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>

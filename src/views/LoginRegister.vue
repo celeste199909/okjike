@@ -1,4 +1,5 @@
 <template>
+<div class="wrapper">
   <div id="block">
     <el-tabs v-model="activeName">
       <el-tab-pane label="登录" name="login">
@@ -43,6 +44,8 @@
       </el-tab-pane>
     </el-tabs>
   </div>
+</div>
+  
 </template>
 
 <script>
@@ -89,7 +92,7 @@ export default {
               return;
             }
             localStorage.setItem("userInfo", JSON.stringify(res.data.data))
-            location.href = "/";
+            location.href = "/discovery";
             console.log("login success")
           })
           .catch((e) => {
@@ -102,12 +105,19 @@ export default {
 </script>
 
 <style scoped>
+.wrapper{
+  padding: 180px 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 #block {
+  width: 300px;
+  height: 270px;
   background-color: white;
-  margin: 8% 32%;
   padding: 50px;
-  border-radius: 2px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  /* box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); */
   text-align: center;
   color: skyblue;
 }

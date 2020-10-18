@@ -16,8 +16,8 @@
     ></el-autocomplete>
     <div class="operations">
       <div class="files">
-        <el-link icon="el-icon-picture-outline-round">图片</el-link>
-        <el-link icon="el-icon-video-camera">视频</el-link>
+        <!-- <el-link icon="el-icon-picture-outline-round">图片</el-link>
+        <el-link icon="el-icon-video-camera">视频</el-link> -->
       </div>
       <el-button size="mini" @click="handlePublishArticle">发布</el-button>
     </div>

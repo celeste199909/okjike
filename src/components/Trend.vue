@@ -20,12 +20,12 @@
             {{ aArticle.content }}
           </div>
           <div class="grid-content bg-purple-light footer">
-            <div class="footer-item"><i class="el-icon-thumb"></i></div>
+            <div class="footer-item"><i class="el-icon-thumb"></i> <span>{{ JSON.parse(aArticle.thumbsup).length }}</span></div>
             <div class="footer-item">
-              <i class="el-icon-chat-dot-round"></i>
+              <i class="el-icon-chat-dot-round"></i> <span>{{JSON.parse(aArticle.comment).length}}</span>
             </div>
-            <div class="footer-item"><i class="el-icon-star-off"></i></div>
-            <div class="footer-item"><i class="el-icon-share"></i></div>
+            <div class="footer-item"><i class="el-icon-star-off"></i> <span>{{JSON.parse(aArticle.collection).length}}</span></div>
+            <!-- <div class="footer-item"><i class="el-icon-share"></i></div> -->
           </div>
         </el-col>
       </el-row>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+// import axios from 'axios';
 // import axios from "axios"
 export default {
   name: "Trend",
@@ -46,17 +47,24 @@ export default {
         slogan: "",
         content: "",
         group: "",
+        thumbsup: [],
+        comment: [],
+        collection: []
       },
     };
   },
   methods: {
     ArticleDetails(id) {
-      console.log(id);
+      // console.log(id);
       this.$router.push(`/details/${id}`);
     },
+
   },
-  mounted() {
-    // this.article = this.aArticle
+  created() {
+    // this.articlet.humbsup = JSON.parse(aArticle.humbsup)
+    // this.articlet.comment = JSON.parse(aArticle.comment)
+    // this.articlet.collection = JSON.parse(aArticle.collection)
+    // console.log(this.articlet.humbsup)
   },
 };
 </script>
@@ -89,51 +97,6 @@ export default {
   /* animation: bgSlide 1s; */
   transform: scale(1.02);
 }
-/* @keyframes bgSlide {
-  0% {
-    background: linear-gradient(to right, #fff 0%, #eff3f6 100%);
-  }
-  10% {
-    background: linear-gradient(to right, #fff 10%, #eff3f6 90%);
-
-  }
-  20% {
-    background: linear-gradient(to right, #fff 20%, #eff3f6 80%);
-
-  }
-  30% {
-    background: linear-gradient(to right, #fff 30%, #eff3f6 70%);
-
-  }
-  40% {
-    background: linear-gradient(to right, #fff 40%, #eff3f6 60%);
-
-  }
-  50% {
-    background: linear-gradient(to right, #fff 50%, #eff3f6 50%);
-
-  }
-  60% {
-    background: linear-gradient(to right, #fff 60%, #eff3f6 40%);
-
-  }
-  70% {
-    background: linear-gradient(to right, #fff 70%, #eff3f6 30%);
-
-  }
-  80% {
-    background: linear-gradient(to right, #fff 80%, #eff3f6 20%);
-
-  }
-  90% {
-    background: linear-gradient(to right, #fff 90%, #eff3f6 10%);
-
-  }
-  100% {
-    background: linear-gradient(to right, #fff 100%, #eff3f6 0%);
-
-  }
-} */
 .username {
   font-weight: 800;
   font-size: 16px;
@@ -152,6 +115,6 @@ export default {
 }
 .footer-item {
   margin-right: 14px;
-  font-size: 18px;
+  font-size: 16px;
 }
 </style>

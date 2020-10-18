@@ -52,6 +52,7 @@ export default {
 <style scoped>
 #trends{
   padding-top: 60px;
+  margin: 0 0 300px 0;
 }
 .el-row{
     width: 80%;

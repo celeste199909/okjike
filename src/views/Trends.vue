@@ -48,6 +48,11 @@ export default {
 
     let userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
+    if(!userInfo){
+      alert("您还没有登录，请先登录！")
+      this.$router.push("/login")
+      return;
+    }
     let userid = userInfo.id;
     axios.get(`api/myFollowingArticles?userid=${userid}`)
     .then( (res) => {
@@ -63,6 +68,7 @@ export default {
 
 <style scoped>
 #trends {
+  margin: 0 0 300px 0;
   padding-top: 60px;
 }
 .el-row {

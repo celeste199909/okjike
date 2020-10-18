@@ -6,8 +6,10 @@ const db = require("./aa_connection")
     username: Sequelize.TEXT,
     slogan: Sequelize.TEXT,
     content: Sequelize.TEXT,
+    group: Sequelize.TEXT,
+    thumbsup: Sequelize.TEXT,
     comment: Sequelize.TEXT,
-    group: Sequelize.TEXT
+    collection: Sequelize.TEXT,
   });
 
 // articles.sync({force: true})
@@ -18,16 +20,20 @@ const db = require("./aa_connection")
 //     username: "hgw",
 //     slogan: "让世界更美好1",
 //     content: "明月几时有？把酒问青天。不知天上宫阙，今夕是何年。我欲乘风归去，又恐琼楼玉宇，高处不胜寒。起舞弄清影，何似在人间。转朱阁，低绮户，照无眠。不应有恨，何事长向别时圆？人有悲欢离合，月有阴晴圆缺，此事古难全。但愿人长久，千里共婵娟。",
+//     group: "宋词",
+//     thumbsup: '[{"userid": "2"}, {"userid": "1"}]',
 //     comment: '[{"userid": "2","username": "abc","slogan": "让世界更美好1","content": "nb"},{"userid": "2","username": "abc","slogan": "让世界更美好1","content": "haha"}]',
-//     group: "宋词"
+//     collection: '[{"userid": "2"}, {"userid": "1"}]',
 //   },
 //   {
 //     userid: "2",
 //     username: "abc",
 //     slogan: "让世界更美好2",
 //     content: "明月几时有？把酒问青天。不知天上宫阙，今夕是何年。我欲乘风归去，又恐琼楼玉宇，高处不胜寒。起舞弄清影，何似在人间。转朱阁，低绮户，照无眠。不应有恨，何事长向别时圆？人有悲欢离合，月有阴晴圆缺，此事古难全。但愿人长久，千里共婵娟。",
+//     group: "宋词",
+//     thumbsup: '[{"userid": "2"}, {"userid": "1"}]',
 //     comment: '[{"userid": "2","username": "abc","slogan": "让世界更美好1","content": "nb"}]',
-//     group: "宋词"
+//     collection: '[{"userid": "2"}, {"userid": "1"}]',
 //   },
 //   {
 //     userid: "3",
@@ -35,7 +41,10 @@ const db = require("./aa_connection")
 //     slogan: "让世界更美好3",
 //     content: "明月几时有？把酒问青天。不知天上宫阙，今夕是何年。我欲乘风归去，又恐琼楼玉宇，高处不胜寒。起舞弄清影，何似在人间。转朱阁，低绮户，照无眠。不应有恨，何事长向别时圆？人有悲欢离合，月有阴晴圆缺，此事古难全。但愿人长久，千里共婵娟。",
 //     comment: '[{"userid": "2","username": "abc","slogan": "让世界更美好1","content": "nb"}]',
-//     group: "宋词"
+//     group: "宋词",
+//     thumbsup: '[{"userid": "2"}, {"userid": "1"}, {"userid": "4"}]',
+//     comment: '[{"userid": "2","username": "abc","slogan": "让世界更美好1","content": "nb"}]',
+//     collection: '[{"userid": "2"}, {"userid": "1"}]',
 //   },
 //   {
 //     userid: "4",
@@ -43,7 +52,10 @@ const db = require("./aa_connection")
 //     slogan: "让世界更美好4",
 //     content: "明月几时有？把酒问青天。不知天上宫阙，今夕是何年。我欲乘风归去，又恐琼楼玉宇，高处不胜寒。起舞弄清影，何似在人间。转朱阁，低绮户，照无眠。不应有恨，何事长向别时圆？人有悲欢离合，月有阴晴圆缺，此事古难全。但愿人长久，千里共婵娟。",
 //     comment: '[{"userid": "2","username": "abc","slogan": "让世界更美好1","content": "nb"}]',
-//     group: "宋词"
+//     group: "宋词",
+//     thumbsup: '[{"userid": "2"}, {"userid": "1"}]',
+//     comment: '[{"userid": "2","username": "abc","slogan": "让世界更美好1","content": "nb"}]',
+//     collection: '[{"userid": "1"}, {"userid": "4"}]',
 //   },
 //   {
 //     userid: "5",
@@ -51,7 +63,10 @@ const db = require("./aa_connection")
 //     slogan: "让世界更美好5",
 //     content: "明月几时有？把酒问青天。不知天上宫阙，今夕是何年。我欲乘风归去，又恐琼楼玉宇，高处不胜寒。起舞弄清影，何似在人间。转朱阁，低绮户，照无眠。不应有恨，何事长向别时圆？人有悲欢离合，月有阴晴圆缺，此事古难全。但愿人长久，千里共婵娟。",
 //     comment: '[{"userid": "2","username": "abc","slogan": "让世界更美好1","content": "nb"}]',
-//     group: "宋词"
+//     group: "宋词",
+//     thumbsup: '[{"userid": "2"}, {"userid": "1"}]',
+//     comment: '[{"userid": "2","username": "abc","slogan": "让世界更美好1","content": "nb"}]',
+//     collection: '[{"userid": "3"}, {"userid": "5"}]',
 //   },
   
 // ]

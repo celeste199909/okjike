@@ -28,4 +28,12 @@ body{
   background-color: #EFF3F6;
   font-size: 14px;
 }
+@keyframes slidein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 </style>
