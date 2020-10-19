@@ -8,7 +8,7 @@
         ></el-avatar>
         <div class="sign-out" >
           <el-button round size="mini" @click="handleLoginOut">
-            {{isLogin ? "注销" : "登录"}}
+              关注
           </el-button>
         </div>
       </div>
@@ -58,7 +58,7 @@
 <script>
 import Trend from "../components/Trend";
 import Follow from "../components/Follow";
-import store from "@/store";
+// import store from "@/store";
 import axios from "axios";
 export default {
   data() {
@@ -67,6 +67,7 @@ export default {
       src:
         "https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg",
       userInfo: {
+        userid: "",
         username: "",
         slogan: "",
         tags: []
@@ -84,42 +85,22 @@ export default {
     },
   },
   created() {
-    // 如果是未登录状态则在store中获取默认的 用户名和个性签名
-    this.userInfo.username = store.state.user.userInfo.username;
-    this.userInfo.slogan = store.state.user.userInfo.slogan;
 
-    // 获取自己的信息
-    let userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-    // 如果存在用户信息则把登录状态变成true
-    if(userInfo){
-      this.isLogin = true;
-    }
-    // 如果用户未登录则return
-    if(!this.isLogin){
-      return;
+     if (this.$route.params.userDetails) {
+        //  console.log(this.$route.params.userDetails);
+      this.userInfo.userid = this.$route.params.userDetails.userInfo.id;
+      this.userInfo.username = this.$route.params.userDetails.userInfo.username;
+      this.userInfo.slogan = this.$route.params.userDetails.userInfo.slogan;
+      this.userInfo.tags = this.$route.params.userDetails.userInfo.tags;
+      this.allMyArticles = this.$route.params.userDetails.aUserArticles;
     }
 
-    this.userInfo.tags = JSON.parse(userInfo.tags)
-
-    let userid = userInfo.id;
-
-    // 获取自己所有的文章
-    axios
-      .get(`api/allMyArticles?userid=${userid}`)
-      .then((res) => {
-        // console.log(res.data.data)
-        this.allMyArticles = res.data.data;
-        // store.commit("user/getAllMyFollowing", res.data.data)
-      })
-      .catch((e) => {
-        console.log(e);
-      });
 
     // 获取所有自己关注的人
 
     axios
-      .get(`api/allMyFollowing?userid=${userid}`)
+      .get(`api/allMyFollowing?userid=${this.userInfo.userid}`)
       .then((res) => {
         // console.log(res.data.data)
         this.allMyFlollowing = res.data.data;
@@ -128,9 +109,9 @@ export default {
         console.log(e);
       });
 
-    // 获取所有关注我的人 /allMyFollower
+    // // 获取所有关注我的人 /allMyFollower
        axios
-      .get(`api/allMyFollower?userid=${userid}`)
+      .get(`api/allMyFollower?userid=${this.userInfo.userid}`)
       .then((res) => {
         // console.log(res.data.data)
         this.allMyFollower = res.data.data;

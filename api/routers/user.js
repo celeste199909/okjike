@@ -1,6 +1,10 @@
 const KoaRouter = require("koa-router")
 const users = require("../models/users")
 const follows = require("../models/follows")
+const articles = require("../models/articles")
+
+var Sequelize = require('sequelize');
+var Op = Sequelize.Op;
 
 const router = new KoaRouter()
 
@@ -18,7 +22,7 @@ router.post("/login", async (ctx) => {
         }
     })
 
-    if(res === null){
+    if (res === null) {
         ctx.body = "登录失败"
         return;
     }
@@ -37,10 +41,10 @@ router.post("/register", async (ctx) => {
     // 验证数据库中是否已有该用户
 
     let res = await users.findOne({
-        where: {username: data.username}
+        where: { username: data.username }
     })
 
-    if(res){
+    if (res) {
         ctx.body = "用户名已存在"
         return;
     }
@@ -65,15 +69,15 @@ router.get("/allMyFollowing", async (ctx) => {
             userid: userid
         }
     })
-    
+
     // 定义一个数组来保存id（我关注的人的id）
     let MyFollowingUserid = []
 
-     res.forEach( async item => {
-            // 把id push 到数组中去
-            MyFollowingUserid.push(item.dataValues.following);
-        })
-    
+    res.forEach(async item => {
+        // 把id push 到数组中去
+        MyFollowingUserid.push(item.dataValues.following);
+    })
+
     // 查询的时候传入id数组
     let allMyFollowing = await users.findAll({
         where: {
@@ -86,7 +90,7 @@ router.get("/allMyFollowing", async (ctx) => {
         status: "成功请求所有我关注的人",
         data: allMyFollowing
     }
-} )
+})
 
 // 关注我的人
 
@@ -102,15 +106,15 @@ router.get("/allMyFollower", async (ctx) => {
     })
 
     console.log(res)
-    
+
     // 定义一个数组来保存id(关注我的人的id)
     let MyFollowerUserid = []
 
-     res.forEach( async item => {
-            // 把id push 到数组中去
-            MyFollowerUserid.push(item.dataValues.userid);
-        })
-    
+    res.forEach(async item => {
+        // 把id push 到数组中去
+        MyFollowerUserid.push(item.dataValues.userid);
+    })
+
     // // 查询的时候传入id数组
     let allMyFollower = await users.findAll({
         where: {
@@ -123,14 +127,80 @@ router.get("/allMyFollower", async (ctx) => {
         status: "成功请求所有我关注的人",
         data: allMyFollower
     }
-} )
+})
+
+// 获取一个用户的信息
+
+router.get("/user/:id", async ctx => {
+    let userid = ctx.params.id
+
+    let userInfo = await users.findOne({
+        where: {
+            id: userid
+        }
+    })
+
+    // console.log(aUser);
+    // aUser = JSON.parse(aUser)
+    delete userInfo.dataValues.password
+    userInfo.tags = JSON.parse(userInfo.tags)
+    // console.log(aUser.tags);
+
+    let aUserArticles = await articles.findAll({
+        where: {
+            userid: userid
+        }
+    })
+    console.log(aUserArticles);
+    aUserArticles.forEach(item => {
+        item.thumbsup = JSON.parse(item.thumbsup)
+        item.comment = JSON.parse(item.comment)
+        item.collection = JSON.parse(item.collection)
+    })
+    console.log(aUserArticles);
+    ctx.body = {
+        code: 200,
+        status: "获取用户详情成功",
+        data: {
+            userInfo: userInfo,
+            aUserArticles: aUserArticles
+        }
+    }
+})
 
 // 推荐用户，根据标签推荐用户
 
 router.post("/recommendatoryUsers", async (ctx) => {
     let data = ctx.request.body;
+    // data = JSON.parse(data)
+    // console.log(data);
+    // let tags = data.tags
+    // tagsArr = tags.split(" ")
+    // console.log(tagsArr)
+    let tag = data[0]
 
-    console.log(data)
+    let recommendatoryUsers = await users.findAll({
+        where: {
+            tags: {
+                [Op.like]: `%${tag}%`
+            },
+        },
+    })
+    // console.log(recommendatoryUsers);
+    // recommendatoryUsers = recommendatoryUsers.dataValues 
+    recommendatoryUsers.forEach(item => {
+        item.dataValues.tags = JSON.parse(item.dataValues.tags)
+    })
+
+    // recommendatoryUsers.tags = JSON.parse(recommendatoryUsers.tags)
+
+    ctx.body = {
+        code: 200,
+        status: "成功获取推荐用户",
+        data: recommendatoryUsers
+    }
 })
+
+
 
 module.exports = router

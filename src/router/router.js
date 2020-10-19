@@ -20,11 +20,11 @@ const routes = [
     { path: '/discovery', component: Discovery },
     { path: '/trends', component: Trends },
     { path: '/message', component: Message },
-    { path: '/personal', component: Personal },
+    { path: '/personal', name: "Personal", component: Personal },
 
     { path: '/login', component: LoginRegister },
     { path: '/details/:id', component: ArticleDetails },
-    { path: '/user/:id', component: UserDetails },
+    { path: '/user/:id', name: "UserDetails", component: UserDetails },
     
   ];
 

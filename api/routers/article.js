@@ -35,7 +35,23 @@ router.get("/allMyArticles", async (ctx) => {
         }
     })
 
-    console.log(allMyArticles)
+    // 格式化
+    allMyArticles.forEach(item => {
+        // console.log(aArticleDetails)
+        if (!item.dataValues.thumbsup) {
+            item.dataValues.thumbsup = "[]";
+        }
+        if (!item.dataValues.comment) {
+            item.dataValues.comment = "[]";
+        }
+        if (!item.dataValues.collection) {
+            item.dataValues.collection = "[]";
+        }
+        item.dataValues.thumbsup = JSON.parse(item.dataValues.thumbsup)
+        item.dataValues.comment = JSON.parse(item.dataValues.comment)
+        item.dataValues.collection = JSON.parse(item.dataValues.collection)
+    })
+   
 
     ctx.body = {
         code: 200,
@@ -49,6 +65,18 @@ router.get("/allMyArticles", async (ctx) => {
 router.get("/allArticles", async (ctx) => {
 
     let allArticles = await articles.findAll();
+    console.log(allArticles);
+
+    allArticles.forEach(item => {
+        if (!item.thumbsup || !item.comment || !item.collection) {
+            item.thumbsup = "[]"
+            item.comment = "[]"
+            item.collection = "[]"
+        }
+        item.thumbsup = JSON.parse(item.thumbsup)
+        item.comment = JSON.parse(item.comment)
+        item.collection = JSON.parse(item.collection)
+    })
 
     ctx.body = {
         code: 200,
@@ -88,7 +116,24 @@ router.get("/myFollowingArticles", async (ctx) => {
             userid: MyFollowingUserid
         }
     })
-    // console.log(myFollowingArticles)
+
+    // 格式化
+    myFollowingArticles.forEach(item => {
+        // console.log(aArticleDetails)
+        if (!item.dataValues.thumbsup) {
+            item.dataValues.thumbsup = "[]";
+        }
+        if (!item.dataValues.comment) {
+            item.dataValues.comment = "[]";
+        }
+        if (!item.dataValues.collection) {
+            item.dataValues.collection = "[]";
+        }
+        item.dataValues.thumbsup = JSON.parse(item.dataValues.thumbsup)
+        item.dataValues.comment = JSON.parse(item.dataValues.comment)
+        item.dataValues.collection = JSON.parse(item.dataValues.collection)
+    })
+    console.log(myFollowingArticles)
 
     ctx.body = {
         code: 200,
@@ -106,13 +151,26 @@ router.get("/details/:id", async (ctx) => {
     // console.log(articleId)
 
 
-    let aArticleDetails = await articles.findAll({
+    let aArticleDetails = await articles.findOne({
         where: {
             id: articleId
         }
     })
-
-    // console.log(allMyArticles)
+    aArticleDetails = aArticleDetails.dataValues
+    // console.log(aArticleDetails)
+    if (!aArticleDetails.thumbsup) {
+        aArticleDetails.thumbsup = "[]";
+    }
+    if (!aArticleDetails.comment) {
+        aArticleDetails.comment = "[]";
+    }
+    if (!aArticleDetails.collection) {
+        aArticleDetails.collection = "[]";
+    }
+    aArticleDetails.thumbsup = JSON.parse(aArticleDetails.thumbsup)
+    aArticleDetails.comment = JSON.parse(aArticleDetails.comment)
+    aArticleDetails.collection = JSON.parse(aArticleDetails.collection)
+    // console.log(aArticleDetails)
 
     ctx.body = {
         code: 200,
@@ -198,9 +256,9 @@ router.post("/thumbsup", async ctx => {
     // 判断是否点过赞
     let hasThumbsup = false;
     oldThumbsup.forEach((item, index) => {
-        if(item.userid && item.userid === userid){
+        if (item.userid && item.userid === userid) {
             // delete oldThumbsup[index];
-            oldThumbsup.splice(index,1)
+            oldThumbsup.splice(index, 1)
             hasThumbsup = true;
         }
     })
@@ -209,7 +267,7 @@ router.post("/thumbsup", async ctx => {
 
     let tempThumbsup = [];
     // 已经点赞则不添加
-    if(!hasThumbsup){
+    if (!hasThumbsup) {
         tempThumbsup.push(aThumbsup)
     }
 
@@ -218,29 +276,62 @@ router.post("/thumbsup", async ctx => {
     newThumbsup = JSON.stringify(newThumbsup)
 
     const result = await articles.update(
-            {
-                thumbsup: newThumbsup,
-            },
-            {
-                where: {
-                    id: articleId
-                }
-            })
-    
-    if(hasThumbsup){
+        {
+            thumbsup: newThumbsup,
+        },
+        {
+            where: {
+                id: articleId
+            }
+        })
+
+    if (hasThumbsup) {
         ctx.body = {
             code: 200,
             status: "取消点赞成功",
             data: JSON.parse(newThumbsup)
         }
-    }else{
+    } else {
         ctx.body = {
             code: 200,
             status: "点赞成功",
             data: JSON.parse(newThumbsup)
         }
     }
-   
+
+})
+
+// 获取热门动态
+router.get("/popularTrends", async ctx => {
+
+
+    let allArticles = await articles.findAll()
+    allArticles.forEach(item => {
+        // console.log(item.dataValues);
+        if (!item.dataValues.thumbsup) {
+            item.dataValues.thumbsup = "[]";
+        }
+        if (!item.dataValues.comment) {
+            item.dataValues.comment = "[]";
+        }
+        if (!item.dataValues.collection) {
+            item.dataValues.collection = "[]";
+        }
+        item.dataValues.thumbsup = JSON.parse(item.dataValues.thumbsup)
+        item.dataValues.comment = JSON.parse(item.dataValues.comment)
+        item.dataValues.collection = JSON.parse(item.dataValues.collection)
+    })
+
+    allArticles.map(item => {
+        let thumbsupCount = item.dataValues.thumbsup.length
+        // console.log(thumbsupCount);
+        return thumbsupCount;
+    })
+    ctx.body = {
+        code: 200,
+        status: "获取热门动态成功",
+        data: allArticles
+    }
 })
 
 

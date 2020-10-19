@@ -20,11 +20,11 @@
             {{ aArticle.content }}
           </div>
           <div class="grid-content bg-purple-light footer">
-            <div class="footer-item"><i class="el-icon-thumb"></i> <span>{{ JSON.parse(aArticle.thumbsup).length }}</span></div>
+            <div class="footer-item"><i class="el-icon-thumb"></i> <span>{{ aArticle.thumbsup.length }}</span></div>
             <div class="footer-item">
-              <i class="el-icon-chat-dot-round"></i> <span>{{JSON.parse(aArticle.comment).length}}</span>
+              <i class="el-icon-chat-dot-round"></i> <span>{{aArticle.comment.length}}</span>
             </div>
-            <div class="footer-item"><i class="el-icon-star-off"></i> <span>{{JSON.parse(aArticle.collection).length}}</span></div>
+            <div class="footer-item"><i class="el-icon-star-off"></i> <span>{{aArticle.collection.length}}</span></div>
             <!-- <div class="footer-item"><i class="el-icon-share"></i></div> -->
           </div>
         </el-col>
@@ -61,10 +61,7 @@ export default {
 
   },
   created() {
-    // this.articlet.humbsup = JSON.parse(aArticle.humbsup)
-    // this.articlet.comment = JSON.parse(aArticle.comment)
-    // this.articlet.collection = JSON.parse(aArticle.collection)
-    // console.log(this.articlet.humbsup)
+
   },
 };
 </script>

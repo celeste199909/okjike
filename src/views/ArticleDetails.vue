@@ -5,8 +5,8 @@
         <!-- 左边 -->
         <el-col :span="2">
           <div
-            class="grid-content bg-purple"
-            @click="handleUserDetails(aArticle.id)"
+            class="grid-content bg-purple avatar"
+            @click="handleUserDetails(aArticle.userid)"
           >
             <el-avatar
               src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
@@ -92,6 +92,7 @@ export default {
   data() {
     return {
       aArticle: {},
+      userInfo: {},
       thumbsupArr: [],
       commentArr: [],
       collectionArr: [],
@@ -129,8 +130,8 @@ export default {
       //   console.log(aComment);
       axios
         .post("api/publishComment", aComment)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
+        //   console.log(res);
           this.commentContent = "";
           alert("评论成功！");
         })
@@ -156,9 +157,26 @@ export default {
           console.log(err);
         });
     },
-    handleUserDetails(id) {
-      //   this.$router.push(`/user/2`);
-      console.log(id);
+    handleUserDetails(userid) {
+        console.log(userid);
+        let currentUserid = JSON.parse(localStorage.getItem("userInfo")).id;
+        // 如果是当前用户 则直接跳转到 personal 页面即可
+        if(Number(userid) === currentUserid){
+            this.$router.push("/personal")
+            return;
+        }
+        axios.get(`api/user/${userid}`)
+        .then( res => {
+            // let data = res.data;
+            console.log(res.data.data.userInfo);
+            // console.log(res.data.data.aUserArticles);
+            // this.userInfo = data;
+            // 命名的路由
+            this.$router.push({ name: 'UserDetails', params: { userDetails: res.data.data }})
+        })
+        .catch( err => {
+            console.log(err);
+        })
     },
   },
   created() {
@@ -167,12 +185,18 @@ export default {
     axios
       .get("api" + pathname)
       .then((res) => {
-        // console.log(res.data.data[0])
-        this.aArticle = res.data.data[0];
-        // console.log(JSON.parse(this.aArticle.comment).length)
-        this.thumbsupArr = JSON.parse(this.aArticle.thumbsup);
-        this.commentArr = JSON.parse(this.aArticle.comment);
-        this.collectionArr = JSON.parse(this.aArticle.collection);
+        // console.log(res.data.data)
+        let data = res.data.data;
+        this.aArticle = {
+            userid: data.userid,
+            username: data.username,
+            slogan: data.slogan,
+            content: data.content
+        };
+        // // console.log(JSON.parse(this.aArticle.comment).length)
+        this.thumbsupArr = data.thumbsup;
+        this.commentArr = data.comment;
+        this.collectionArr = data.collection;
       })
       .catch((err) => {
         console.log(err);
@@ -204,6 +228,9 @@ export default {
 }
 .grid-content {
   margin: 8px 0;
+}
+.avatar{
+    cursor: pointer;
 }
 .username {
   font-weight: 800;

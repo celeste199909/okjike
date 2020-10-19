@@ -24,7 +24,6 @@ import SideMessage from "../components/SideMessage";
 import Footer from "../components/Footer";
 import axios from "axios"
 
-
 export default {
   name: "Discovery",
   data() {
