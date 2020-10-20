@@ -41,10 +41,10 @@
               <i class="el-icon-chat-dot-round"></i>
               <span>{{ commentArr.length }}</span>
             </div>
-            <div class="footer-item">
+            <!-- <div class="footer-item">
               <i class="el-icon-star-off"></i>
               <span>{{ collectionArr.length }}</span>
-            </div>
+            </div> -->
             <!-- <div class="footer-item"><i class="el-icon-share"></i></div> -->
           </div>
         </el-col>
@@ -158,7 +158,7 @@ export default {
         });
     },
     handleUserDetails(userid) {
-        console.log(userid);
+        // console.log(userid);
         let currentUserid = JSON.parse(localStorage.getItem("userInfo")).id;
         // 如果是当前用户 则直接跳转到 personal 页面即可
         if(Number(userid) === currentUserid){
@@ -168,7 +168,7 @@ export default {
         axios.get(`api/user/${userid}`)
         .then( res => {
             // let data = res.data;
-            console.log(res.data.data.userInfo);
+            // console.log(res.data.data);
             // console.log(res.data.data.aUserArticles);
             // this.userInfo = data;
             // 命名的路由

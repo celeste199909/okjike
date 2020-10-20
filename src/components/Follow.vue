@@ -16,7 +16,7 @@
       </el-col>
       <!--  -->
       <el-col :span="4">
-        <el-button round size="medium"><i class="el-icon-plus">关注</i></el-button>
+        <!-- <el-button round size="medium"><i class="el-icon-plus">关注</i></el-button> -->
       </el-col>
     </el-row>
   </div>

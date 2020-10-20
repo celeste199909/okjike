@@ -11,10 +11,10 @@
       </div>
     </div>
 
-    <div v-if="title === '热门动态'">
+    <!-- <div v-if="title === '热门动态'">
       {{ title }}
       <div></div>
-    </div>
+    </div> -->
   </div>
 </template>
 

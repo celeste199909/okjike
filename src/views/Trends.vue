@@ -66,7 +66,7 @@ export default {
 
     let tags = JSON.parse(localStorage.getItem("userInfo")).tags
     tags = JSON.parse(tags)
-    console.log(tags);
+    // console.log(tags);
 
     axios.post("api/recommendatoryUsers", tags)
     .then( res => {

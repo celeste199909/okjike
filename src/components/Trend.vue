@@ -24,7 +24,7 @@
             <div class="footer-item">
               <i class="el-icon-chat-dot-round"></i> <span>{{aArticle.comment.length}}</span>
             </div>
-            <div class="footer-item"><i class="el-icon-star-off"></i> <span>{{aArticle.collection.length}}</span></div>
+            <!-- <div class="footer-item"><i class="el-icon-star-off"></i> <span>{{aArticle.collection.length}}</span></div> -->
             <!-- <div class="footer-item"><i class="el-icon-share"></i></div> -->
           </div>
         </el-col>

@@ -7,8 +7,8 @@
           src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
         ></el-avatar>
         <div class="sign-out" >
-          <el-button round size="mini" @click="handleLoginOut">
-              关注
+          <el-button round size="mini" @click="handleFollow(userInfo)">
+              {{hasFollowed ? "取关" : "关注"}}
           </el-button>
         </div>
       </div>
@@ -36,12 +36,12 @@
           <Trend :aArticle="item"></Trend>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="我关注的" name="second">
+      <el-tab-pane label="关注" name="second">
         <div v-for="(item, index) in allMyFlollowing" :key="index">
           <Follow :username="item.username" :slogan="item.slogan"></Follow>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="关注我的" name="third">
+      <el-tab-pane label="被关注" name="third">
         <div v-for="(item, index) in allMyFollower" :key="index">
           <Follow :username="item.username" :slogan="item.slogan"></Follow>
         </div>
@@ -75,16 +75,52 @@ export default {
       allMyArticles: [],
       allMyFlollowing: [],
       allMyFollower: [],
-      isLogin: false
+    //   isLogin: false,
+      hasFollowed: false
     };
   },
   methods: {
-    handleLoginOut() {
-      localStorage.removeItem("userInfo");
-      location.href = "/login"
-    },
+    // handleLoginOut() {
+    //   localStorage.removeItem("userInfo");
+    //   location.href = "/login"
+    // },
+    handleFollow(){
+        // console.log(userInfo.userid);
+        let userid = JSON.parse(localStorage.getItem("userInfo")).id
+        let data = {
+            userid: userid,
+            following: this.userInfo.userid
+        }
+        // console.log(data);
+        axios.post("api/followUser",data)
+        .then( (res) => {
+            console.log(res);
+            this.hasFollowed = !this.hasFollowed
+        })
+        .catch( (err) => {
+            console.log(err);
+        })
+
+
+    }
   },
   created() {
+    //  查看是否关注该用户
+    let userid = JSON.parse(localStorage.getItem("userInfo")).id;
+    let following = this.$route.params.userDetails.userInfo.id;
+    console.log(following);
+    let data = {
+        userid: userid,
+        following: following
+    }
+    axios.post("api/hasFollowed", data)
+    .then( res => {
+        // console.log(res.data.data);
+        this.hasFollowed = res.data.data;
+    })
+    .catch( err => {
+        console.log(err);
+    })
 
 
      if (this.$route.params.userDetails) {

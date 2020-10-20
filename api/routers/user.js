@@ -200,6 +200,73 @@ router.post("/recommendatoryUsers", async (ctx) => {
         data: recommendatoryUsers
     }
 })
+// 关注 和取消关注
+router.post("/followUser", async ctx => {
+
+    let data = ctx.request.body;
+
+    let userid = data.userid;
+    let following = data.following;
+
+    console.log(data);
+
+    let hasFollowed = await follows.findOne({
+        where: {
+            userid: userid,
+            following: following
+        }
+    })
+
+    if (hasFollowed) {
+
+
+        let unfollow =  await follows.destroy({
+            where: {
+                userid: userid,
+                following: following
+            }
+        })
+
+        console.log(unfollow);
+        ctx.body = {
+            code: 200,
+            status: "取消关注成功",
+            data: data
+        }
+        return;
+    }
+
+    let follow = follows.build(data);
+    await follow.save()
+
+    ctx.body = {
+        code: 200,
+        status: "关注成功",
+        data: data
+    }
+})
+
+// 查看是否关注某个用户
+
+router.post("/hasFollowed", async ctx => {
+    let data = ctx.request.body;
+    
+    console.log(data)
+    let res = await follows.findOne({
+        where: {
+            userid: data.userid,
+            following: data.following
+        }
+    })
+    
+    let hasFollowed = Boolean(res)
+
+    ctx.body = {
+        code: 200,
+        status: hasFollowed ? "已关注" : "未关注",
+        data: hasFollowed
+    }
+})
 
 
 

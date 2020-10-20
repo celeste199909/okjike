@@ -10,7 +10,7 @@ router.post("/publishArticle", async (ctx) => {
 
     let data = ctx.request.body;
 
-    console.log(data);
+    // console.log(data);
 
     let article = articles.build(data)
     await article.save()
@@ -27,7 +27,7 @@ router.get("/allMyArticles", async (ctx) => {
 
     let data = ctx.request.query;
     let userid = Number(data.userid);
-    console.log(typeof data.userid)
+    // console.log(typeof data.userid)
 
     let allMyArticles = await articles.findAll({
         where: {
@@ -65,7 +65,7 @@ router.get("/allMyArticles", async (ctx) => {
 router.get("/allArticles", async (ctx) => {
 
     let allArticles = await articles.findAll();
-    console.log(allArticles);
+    // console.log(allArticles);
 
     allArticles.forEach(item => {
         if (!item.thumbsup || !item.comment || !item.collection) {
@@ -251,7 +251,7 @@ router.post("/thumbsup", async ctx => {
     }
 
     let oldThumbsup = JSON.parse(article.dataValues.thumbsup);
-    console.log(oldThumbsup);
+    // console.log(oldThumbsup);
 
     // 判断是否点过赞
     let hasThumbsup = false;
@@ -262,7 +262,7 @@ router.post("/thumbsup", async ctx => {
             hasThumbsup = true;
         }
     })
-    console.log(oldThumbsup);
+    // console.log(oldThumbsup);
 
 
     let tempThumbsup = [];
@@ -302,37 +302,39 @@ router.post("/thumbsup", async ctx => {
 })
 
 // 获取热门动态
-router.get("/popularTrends", async ctx => {
+// router.get("/popularTrends", async ctx => {
 
 
-    let allArticles = await articles.findAll()
-    allArticles.forEach(item => {
-        // console.log(item.dataValues);
-        if (!item.dataValues.thumbsup) {
-            item.dataValues.thumbsup = "[]";
-        }
-        if (!item.dataValues.comment) {
-            item.dataValues.comment = "[]";
-        }
-        if (!item.dataValues.collection) {
-            item.dataValues.collection = "[]";
-        }
-        item.dataValues.thumbsup = JSON.parse(item.dataValues.thumbsup)
-        item.dataValues.comment = JSON.parse(item.dataValues.comment)
-        item.dataValues.collection = JSON.parse(item.dataValues.collection)
-    })
+//     let allArticles = await articles.findAll()
+//     allArticles.forEach(item => {
+//         // console.log(item.dataValues);
+//         if (!item.dataValues.thumbsup) {
+//             item.dataValues.thumbsup = "[]";
+//         }
+//         if (!item.dataValues.comment) {
+//             item.dataValues.comment = "[]";
+//         }
+//         if (!item.dataValues.collection) {
+//             item.dataValues.collection = "[]";
+//         }
+//         item.dataValues.thumbsup = JSON.parse(item.dataValues.thumbsup)
+//         item.dataValues.comment = JSON.parse(item.dataValues.comment)
+//         item.dataValues.collection = JSON.parse(item.dataValues.collection)
+//     })
 
-    allArticles.map(item => {
-        let thumbsupCount = item.dataValues.thumbsup.length
-        // console.log(thumbsupCount);
-        return thumbsupCount;
-    })
-    ctx.body = {
-        code: 200,
-        status: "获取热门动态成功",
-        data: allArticles
-    }
-})
+//     allArticles.map((item,index) => {
+//         let thumbsupCount = item.dataValues.thumbsup.length
+//         console.log(thumbsupCount);
+//         return thumbsupCount;
+//     })
+
+
+//     ctx.body = {
+//         code: 200,
+//         status: "获取热门动态成功",
+//         data: allArticles
+//     }
+// })
 
 
 // 获取最近十条动态

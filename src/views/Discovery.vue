@@ -8,7 +8,7 @@
       </el-col>
       <el-col :span="6">
         <div class="grid-content bg-purple-light">
-          <SideMessage title="热门动态"></SideMessage>
+          <SideMessage title="推荐用户" :recommendatoryUsers="recommendatoryUsers"></SideMessage>
         </div>
         <div class="grid-content bg-purple-light">
           <Footer></Footer>
@@ -28,7 +28,8 @@ export default {
   name: "Discovery",
   data() {
     return {
-      allArticles: []
+      allArticles: [],
+      recommendatoryUsers: []
     };
   },
   components: {
@@ -44,6 +45,21 @@ export default {
       this.allArticles = response.data.data
     })
     .catch(e => {throw e})
+
+        // 获取推荐用户
+
+    let tags = JSON.parse(localStorage.getItem("userInfo")).tags
+    tags = JSON.parse(tags)
+    // console.log(tags);
+
+    axios.post("api/recommendatoryUsers", tags)
+    .then( res => {
+      // console.log(res.data.data);
+      this.recommendatoryUsers = res.data.data;
+    })
+    .catch( err => {
+      console.log(err);
+    })
   }
 };
 </script>

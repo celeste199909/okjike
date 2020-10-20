@@ -69,6 +69,7 @@ export default {
       src:
         "https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg",
       userInfo: {
+        userid: "",
         username: "",
         slogan: "",
         tags: [],
@@ -104,6 +105,7 @@ export default {
 
     this.userInfo.tags = JSON.parse(userInfo.tags);
 
+    this.userid = userInfo.id;
     let userid = userInfo.id;
 
     // 获取自己所有的文章
