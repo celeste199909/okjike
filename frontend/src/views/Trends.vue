@@ -55,7 +55,7 @@ export default {
       return;
     }
     let userid = userInfo.id;
-    axios.get(`api/myFollowingArticles?userid=${userid}`)
+    axios.get(`/myFollowingArticles?userid=${userid}`)
     .then( (res) => {
       this.allFollowingArticles = res.data.data;
       // console.log(res)
@@ -68,7 +68,7 @@ export default {
     tags = JSON.parse(tags)
     // console.log(tags);
 
-    axios.post("api/recommendatoryUsers", tags)
+    axios.post("/recommendatoryUsers", tags)
     .then( res => {
       // console.log(res.data.data);
       this.recommendatoryUsers = res.data.data;

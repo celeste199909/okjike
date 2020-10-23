@@ -67,7 +67,7 @@ export default {
     submitForm(formName) {
       if (formName === "register") {
         this.axios
-          .post("/api/register", {
+          .post("/register", {
             username: this.username,
             password: this.password,
             slogan: "让世界更美好"
@@ -82,7 +82,7 @@ export default {
 
       if(formName === "login"){
         this.axios
-          .post("/api/login", {
+          .post("/login", {
             username: this.username,
             password: this.password,
           })

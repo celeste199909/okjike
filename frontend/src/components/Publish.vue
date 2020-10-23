@@ -50,7 +50,7 @@ export default {
       this.article.username = userInfo.username;
       this.article.slogan = userInfo.slogan;
 
-      axios.post("api/publishArticle", 
+      axios.post("/publishArticle", 
         this.article
       ).then(res => {
         console.log(res);

@@ -9,7 +9,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 import axios from "axios"
-axios.defaults.baseURL = 'http://localhost:9000';
+axios.defaults.baseURL = 'https://www.muting.top';
 Vue.prototype.axios = axios
 
 

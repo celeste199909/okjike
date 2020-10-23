@@ -39,7 +39,7 @@ export default {
   },
 
   created(){
-    axios.get("/api/allArticles")
+    axios.get("/allArticles")
     .then( ( response ) => {
       // console.log(response.data.data)
       this.allArticles = response.data.data
@@ -52,7 +52,7 @@ export default {
     tags = JSON.parse(tags)
     // console.log(tags);
 
-    axios.post("api/recommendatoryUsers", tags)
+    axios.post("/recommendatoryUsers", tags)
     .then( res => {
       // console.log(res.data.data);
       this.recommendatoryUsers = res.data.data;

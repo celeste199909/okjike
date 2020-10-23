@@ -36,7 +36,7 @@ export default {
       console.log(userid);
       // this.$router.push({name: "UserDetails", params: {aUser}})
       axios
-        .get(`api/user/${userid}`)
+        .get(`/user/${userid}`)
         .then((res) => {
           // let data = res.data;
           // console.log(res.data.data.userInfo);

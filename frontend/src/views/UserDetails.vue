@@ -92,7 +92,7 @@ export default {
             following: this.userInfo.userid
         }
         // console.log(data);
-        axios.post("api/followUser",data)
+        axios.post("/followUser",data)
         .then( (res) => {
             console.log(res);
             this.hasFollowed = !this.hasFollowed
@@ -113,7 +113,7 @@ export default {
         userid: userid,
         following: following
     }
-    axios.post("api/hasFollowed", data)
+    axios.post("/hasFollowed", data)
     .then( res => {
         // console.log(res.data.data);
         this.hasFollowed = res.data.data;
@@ -136,7 +136,7 @@ export default {
     // 获取所有自己关注的人
 
     axios
-      .get(`api/allMyFollowing?userid=${this.userInfo.userid}`)
+      .get(`/allMyFollowing?userid=${this.userInfo.userid}`)
       .then((res) => {
         // console.log(res.data.data)
         this.allMyFlollowing = res.data.data;
@@ -147,7 +147,7 @@ export default {
 
     // // 获取所有关注我的人 /allMyFollower
        axios
-      .get(`api/allMyFollower?userid=${this.userInfo.userid}`)
+      .get(`/allMyFollower?userid=${this.userInfo.userid}`)
       .then((res) => {
         // console.log(res.data.data)
         this.allMyFollower = res.data.data;

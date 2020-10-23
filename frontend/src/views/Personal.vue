@@ -110,7 +110,7 @@ export default {
 
     // 获取自己所有的文章
     axios
-      .get(`api/allMyArticles?userid=${userid}`)
+      .get(`/allMyArticles?userid=${userid}`)
       .then((res) => {
         // console.log(res.data.data)
         this.allMyArticles = res.data.data;
@@ -123,7 +123,7 @@ export default {
     // 获取所有自己关注的人
 
     axios
-      .get(`api/allMyFollowing?userid=${userid}`)
+      .get(`/allMyFollowing?userid=${userid}`)
       .then((res) => {
         // console.log(res.data.data)
         this.allMyFlollowing = res.data.data;
@@ -134,7 +134,7 @@ export default {
 
     // 获取所有关注我的人 /allMyFollower
     axios
-      .get(`api/allMyFollower?userid=${userid}`)
+      .get(`/allMyFollower?userid=${userid}`)
       .then((res) => {
         // console.log(res.data.data)
         this.allMyFollower = res.data.data;

@@ -129,7 +129,7 @@ export default {
       };
       //   console.log(aComment);
       axios
-        .post("api/publishComment", aComment)
+        .post("/publishComment", aComment)
         .then(() => {
         //   console.log(res);
           this.commentContent = "";
@@ -148,7 +148,7 @@ export default {
         userid: userid,
       };
       axios
-        .post("api/thumbsup", aThumbsup)
+        .post("/thumbsup", aThumbsup)
         .then(() => {
           // console.log(res);
           this.hasThumbsup = !this.hasThumbsup;
@@ -165,7 +165,7 @@ export default {
             this.$router.push("/personal")
             return;
         }
-        axios.get(`api/user/${userid}`)
+        axios.get(`/user/${userid}`)
         .then( res => {
             // let data = res.data;
             // console.log(res.data.data);
@@ -183,7 +183,7 @@ export default {
     // console.log(location.pathname)
     let pathname = location.pathname;
     axios
-      .get("api" + pathname)
+      .get(pathname)
       .then((res) => {
         // console.log(res.data.data)
         let data = res.data.data;
